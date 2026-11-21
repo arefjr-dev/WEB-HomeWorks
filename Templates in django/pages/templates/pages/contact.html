@@ -12,20 +12,146 @@
   <style>
     body { font-family: Vazirmatn, sans-serif; }
     .container { max-width: 960px; margin: 24px auto; padding: 0 16px; }
+
+    /* منوی بالا: دکمه‌ها در کامپیوتر، منوی کشویی در موبایل */
+    .nav-desktop { display: flex; gap: 4px; }
+    .nav-mobile { display: none; }
+
+    /* عنوان صفحه */
+    .page-header { text-align: center; margin-bottom: 24px; }
+    .page-header h1 { margin-bottom: 8px; }
+    .page-header p { margin: 0; opacity: 0.8; }
+
+    /* چیدمان دو ستونی: اطلاعات و فرم */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .contact-card {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 24px;
+    }
+    .contact-card h2 { margin-top: 0; }
+    .contact-card mdui-text-field { width: 100%; margin-bottom: 16px; }
+    .contact-card mdui-button[type="submit"] { width: 100%; }
+
+    /* صفحه‌های باریک (موبایل) */
+    @media (max-width: 640px) {
+      .nav-desktop { display: none; }
+      .nav-mobile { display: block; }
+    }
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .container { padding: 0 12px; }
+      .contact-card { padding: 16px; }
+    }
   </style>
 </head>
 <body>
   <mdui-top-app-bar>
     <mdui-top-app-bar-title>سکانس</mdui-top-app-bar-title>
     <div style="flex-grow: 1"></div>
-    <mdui-button variant="text" href="/about/">درباره ما</mdui-button>
-    <mdui-button variant="tonal" href="/contact/">تماس با ما</mdui-button>
-    <mdui-button variant="text" href="/login/">ورود</mdui-button>
-    <mdui-button variant="text" href="/register/">ثبت‌نام</mdui-button>
+
+    <div class="nav-desktop">
+      <mdui-button variant="text" href="/about/">درباره ما</mdui-button>
+      <mdui-button variant="tonal" href="/contact/">تماس با ما</mdui-button>
+      <mdui-button variant="text" href="/login/">ورود</mdui-button>
+      <mdui-button variant="text" href="/register/">ثبت‌نام</mdui-button>
+    </div>
+
+    <mdui-dropdown class="nav-mobile">
+      <mdui-button slot="trigger" variant="tonal">منو</mdui-button>
+      <mdui-menu>
+        <mdui-menu-item href="/about/">درباره ما</mdui-menu-item>
+        <mdui-menu-item href="/contact/">تماس با ما</mdui-menu-item>
+        <mdui-menu-item href="/login/">ورود</mdui-menu-item>
+        <mdui-menu-item href="/register/">ثبت‌نام</mdui-menu-item>
+      </mdui-menu>
+    </mdui-dropdown>
   </mdui-top-app-bar>
 
   <main class="container">
-    <h1>تماس با ما</h1>
+    <div class="page-header">
+      <h1>تماس با ما</h1>
+      <p>سؤال، پیشنهاد یا انتقادی دارید؟ خوشحال می‌شویم بشنویم.</p>
+    </div>
+
+    <div class="contact-grid">
+
+      <!-- اطلاعات تماس (فرضی) -->
+      <mdui-card class="contact-card" variant="outlined">
+        <h2>اطلاعات تماس</h2>
+        <mdui-list>
+          <mdui-list-item
+            nonclickable
+            headline="آدرس"
+            description="تهران، خیابان ولیعصر، پلاک ۱۲۳، طبقه سوم">
+          </mdui-list-item>
+          <mdui-list-item
+            nonclickable
+            headline="تلفن"
+            description="۰۲۱-۱۲۳۴۵۶۷۸">
+          </mdui-list-item>
+          <mdui-list-item
+            nonclickable
+            headline="ایمیل"
+            description="info@sekans.example">
+          </mdui-list-item>
+          <mdui-list-item
+            nonclickable
+            headline="ساعات پاسخگویی"
+            description="شنبه تا چهارشنبه، ۹ صبح تا ۵ بعدازظهر">
+          </mdui-list-item>
+        </mdui-list>
+      </mdui-card>
+
+      <!-- فرم تماس -->
+      <mdui-card class="contact-card" variant="elevated">
+        <h2>پیام خود را بنویسید</h2>
+
+        <form method="post" action="/contact/">
+          {% csrf_token %}
+
+          <mdui-text-field
+            variant="outlined"
+            label="نام و نام خانوادگی"
+            name="full_name"
+            required>
+          </mdui-text-field>
+
+          <mdui-text-field
+            variant="outlined"
+            type="email"
+            label="ایمیل"
+            name="email"
+            required>
+          </mdui-text-field>
+
+          <mdui-text-field
+            variant="outlined"
+            label="موضوع"
+            name="subject"
+            required>
+          </mdui-text-field>
+
+          <mdui-text-field
+            variant="outlined"
+            label="متن پیام"
+            name="message"
+            rows="5"
+            required>
+          </mdui-text-field>
+
+          <mdui-button type="submit" variant="filled">ارسال پیام</mdui-button>
+        </form>
+      </mdui-card>
+
+    </div>
   </main>
 </body>
 </html>

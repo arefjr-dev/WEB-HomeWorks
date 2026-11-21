@@ -12,20 +12,182 @@
   <style>
     body { font-family: Vazirmatn, sans-serif; }
     .container { max-width: 960px; margin: 24px auto; padding: 0 16px; }
+
+    /* منوی بالا: دکمه‌ها در کامپیوتر، منوی کشویی در موبایل */
+    .nav-desktop { display: flex; gap: 4px; }
+    .nav-mobile { display: none; }
+
+    /* بخش بالای صفحه */
+    .hero { text-align: center; margin: 32px 0 40px; }
+    .hero h1 { margin-bottom: 12px; }
+    .hero p { margin: 0; font-size: 1.1rem; opacity: 0.85; }
+
+    /* کارت‌های بخش‌ها */
+    .section-card {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .section-card h2 { margin-top: 0; }
+    .section-card p { margin: 0; line-height: 2; }
+
+    /* عنوان بخش امکانات */
+    .section-title { margin: 32px 0 16px; }
+
+    /* شبکه امکانات: تعداد ستون‌ها خودکار با عرض صفحه تنظیم می‌شود */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .feature-card {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    .feature-card h3 { margin: 0 0 8px; }
+    .feature-card p { margin: 0; line-height: 1.9; }
+
+    /* سازنده */
+    .creator { display: flex; align-items: center; gap: 16px; }
+    .creator h3 { margin: 0 0 4px; }
+    .creator p { margin: 0; }
+
+    /* دعوت پایانی */
+    .cta { text-align: center; margin: 40px 0 24px; }
+    .cta h2 { margin-bottom: 16px; }
+    .cta-buttons { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+    /* صفحه‌های باریک (موبایل) */
+    @media (max-width: 640px) {
+      .nav-desktop { display: none; }
+      .nav-mobile { display: block; }
+    }
+    @media (max-width: 480px) {
+      .container { padding: 0 12px; }
+      .section-card { padding: 16px; }
+    }
   </style>
 </head>
 <body>
   <mdui-top-app-bar>
     <mdui-top-app-bar-title>سکانس</mdui-top-app-bar-title>
     <div style="flex-grow: 1"></div>
-    <mdui-button variant="tonal" href="/about/">درباره ما</mdui-button>
-    <mdui-button variant="text" href="/contact/">تماس با ما</mdui-button>
-    <mdui-button variant="text" href="/login/">ورود</mdui-button>
-    <mdui-button variant="text" href="/register/">ثبت‌نام</mdui-button>
+
+    <div class="nav-desktop">
+      <mdui-button variant="tonal" href="/about/">درباره ما</mdui-button>
+      <mdui-button variant="text" href="/contact/">تماس با ما</mdui-button>
+      <mdui-button variant="text" href="/login/">ورود</mdui-button>
+      <mdui-button variant="text" href="/register/">ثبت‌نام</mdui-button>
+    </div>
+
+    <mdui-dropdown class="nav-mobile">
+      <mdui-button slot="trigger" variant="tonal">منو</mdui-button>
+      <mdui-menu>
+        <mdui-menu-item href="/about/">درباره ما</mdui-menu-item>
+        <mdui-menu-item href="/contact/">تماس با ما</mdui-menu-item>
+        <mdui-menu-item href="/login/">ورود</mdui-menu-item>
+        <mdui-menu-item href="/register/">ثبت‌نام</mdui-menu-item>
+      </mdui-menu>
+    </mdui-dropdown>
   </mdui-top-app-bar>
 
   <main class="container">
-    <h1>درباره ما</h1>
+
+    <!-- عنوان و شعار -->
+    <section class="hero">
+      <h1>درباره سکانس</h1>
+      <p>سینما را از تماشای تنها به تجربه‌ای جمعی تبدیل می‌کنیم.</p>
+    </section>
+
+    <!-- ما که هستیم -->
+    <mdui-card class="section-card" variant="outlined">
+      <h2>ما که هستیم؟</h2>
+      <p>
+        سکانس یک شبکه اجتماعی برای دوستداران فیلم و سریال است. ایده‌اش از تجربه‌ای ساده شروع شد:
+        بعد از دیدن یک فیلم خوب، دوست داریم درباره‌اش حرف بزنیم، اما گفتگوها در گروه‌ها و شبکه‌های
+        پراکنده گم می‌شوند. سکانس جایی است که این گفتگوها در یک مکان مشخص و در کنار هم شکل می‌گیرند.
+      </p>
+    </mdui-card>
+
+    <!-- ماموریت -->
+    <mdui-card class="section-card" variant="filled">
+      <h2>ماموریت ما</h2>
+      <p>
+        می‌خواهیم سینما را از تماشای تنها به تجربه‌ای جمعی تبدیل کنیم؛ جایی که هر فیلم و هر قسمت
+        از سریال، اتاق گفتگوی خودش را دارد.
+      </p>
+    </mdui-card>
+
+    <!-- مخاطبان -->
+    <mdui-card class="section-card" variant="outlined">
+      <h2>برای چه کسانی؟</h2>
+      <p>
+        سکانس برای همه علاقه‌مندان فیلم و سریال ساخته شده است؛ از کسی که آخر هفته‌ها یک فیلم می‌بیند
+        تا سینمادوستی که دنبال تحلیل و بحث عمیق است.
+      </p>
+    </mdui-card>
+
+    <!-- امکانات -->
+    <h2 class="section-title">امکانات</h2>
+    <div class="features-grid">
+      <mdui-card class="feature-card" variant="elevated">
+        <h3>اتاق گفتگو</h3>
+        <p>برای هر فیلم و هر قسمت سریال یک اتاق مخصوص بحث</p>
+      </mdui-card>
+      <mdui-card class="feature-card" variant="elevated">
+        <h3>نقد و امتیاز</h3>
+        <p>نظرتان را بنویسید و امتیاز بدهید</p>
+      </mdui-card>
+      <mdui-card class="feature-card" variant="elevated">
+        <h3>چت عمومی</h3>
+        <p>با دیگر دوستداران سینما گپ بزنید</p>
+      </mdui-card>
+      <mdui-card class="feature-card" variant="elevated">
+        <h3>سینمای گروهی</h3>
+        <p>هم‌زمان با دوستانتان فیلم ببینید و هم‌زمان گفتگو کنید</p>
+      </mdui-card>
+      <mdui-card class="feature-card" variant="elevated">
+        <h3>بخش دانلود</h3>
+        <p>دسترسی به فیلم‌ها و سریال‌ها</p>
+      </mdui-card>
+    </div>
+
+    <!-- تفاوت ما -->
+    <mdui-card class="section-card" variant="elevated">
+      <h2>چه چیزی ما را متفاوت می‌کند؟</h2>
+      <p>
+        بیشتر سایت‌ها فهرستی از فیلم‌ها را نشان می‌دهند. سکانس روی گفتگوی زنده و اجتماعی تمرکز دارد:
+        اینجا با تمام شدن فیلم، بحث تازه شروع می‌شود.
+      </p>
+    </mdui-card>
+
+    <!-- سازنده -->
+    <mdui-card class="section-card" variant="outlined">
+      <h2>سازنده</h2>
+      <div class="creator">
+        <mdui-avatar>A</mdui-avatar>
+        <div>
+          <h3>ArefJR</h3>
+          <p>بنیان‌گذار و توسعه‌دهنده. سکانس را با علاقه به سینما و برنامه‌نویسی ساخته است.</p>
+        </div>
+      </div>
+    </mdui-card>
+
+    <!-- دعوت پایانی -->
+    <mdui-divider></mdui-divider>
+    <section class="cta">
+      <h2>به سکانس بپیوندید</h2>
+      <div class="cta-buttons">
+        <mdui-button variant="filled" href="/register/">ثبت‌نام</mdui-button>
+        <mdui-button variant="outlined" href="/contact/">تماس با ما</mdui-button>
+      </div>
+    </section>
+
   </main>
 </body>
 </html>
