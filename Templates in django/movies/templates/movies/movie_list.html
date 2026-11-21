@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="mdui-theme-auto">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>فیلم‌ها و سریال‌ها</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
+  <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+  <style>
+    body { font-family: Vazirmatn, sans-serif; }
+    .container { max-width: 960px; margin: 24px auto; padding: 0 16px; }
+
+    /* منوی بالا: دکمه‌ها در کامپیوتر، منوی کشویی در موبایل */
+    .nav-desktop { display: flex; gap: 4px; }
+    .nav-mobile { display: none; }
+
+    /* عنوان صفحه */
+    .page-header { text-align: center; margin-bottom: 24px; }
+    .page-header h1 { margin-bottom: 8px; }
+    .page-header p { margin: 0; opacity: 0.8; }
+
+    /* شبکه کارت‌ها: تعداد ستون‌ها خودکار با عرض صفحه تنظیم می‌شود */
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .movie-card {
+      display: block;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    .movie-card h3 { margin: 0 0 8px; }
+    .movie-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .badge {
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      background-color: rgb(var(--mdui-color-secondary-container));
+      color: rgb(var(--mdui-color-on-secondary-container));
+    }
+    .movie-card p { margin: 0 0 12px; line-height: 1.9; opacity: 0.85; }
+    .movie-info { font-size: 0.9rem; opacity: 0.8; }
+    .more-link { margin: 12px 0 0; font-size: 0.9rem; color: rgb(var(--mdui-color-primary)); opacity: 1; }
+
+    /* وقتی فیلمی وجود ندارد */
+    .empty-state { text-align: center; padding: 48px 0; opacity: 0.8; }
+
+    /* صفحه‌های باریک (موبایل) */
+    @media (max-width: 640px) {
+      .nav-desktop { display: none; }
+      .nav-mobile { display: block; }
+    }
+    @media (max-width: 480px) {
+      .container { padding: 0 12px; }
+      .movie-card { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <mdui-top-app-bar>
+    <mdui-top-app-bar-title>سکانس</mdui-top-app-bar-title>
+    <div style="flex-grow: 1"></div>
+
+    <div class="nav-desktop">
+      <mdui-button variant="text" href="/about/">درباره ما</mdui-button>
+      <mdui-button variant="text" href="/contact/">تماس با ما</mdui-button>
+      <mdui-button variant="tonal" href="/movies/">فیلم‌ها</mdui-button>
+      <mdui-button variant="text" href="/login/">ورود</mdui-button>
+      <mdui-button variant="text" href="/register/">ثبت‌نام</mdui-button>
+    </div>
+
+    <mdui-dropdown class="nav-mobile">
+      <mdui-button slot="trigger" variant="tonal">منو</mdui-button>
+      <mdui-menu>
+        <mdui-menu-item href="/about/">درباره ما</mdui-menu-item>
+        <mdui-menu-item href="/contact/">تماس با ما</mdui-menu-item>
+        <mdui-menu-item href="/movies/">فیلم‌ها</mdui-menu-item>
+        <mdui-menu-item href="/login/">ورود</mdui-menu-item>
+        <mdui-menu-item href="/register/">ثبت‌نام</mdui-menu-item>
+      </mdui-menu>
+    </mdui-dropdown>
+  </mdui-top-app-bar>
+
+  <main class="container">
+    <div class="page-header">
+      <h1>فیلم‌ها و سریال‌ها</h1>
+      <p>{{ movies|length }} عنوان در سکانس</p>
+    </div>
+
+    {% if movies %}
+      <div class="movie-grid">
+        {% for movie in movies %}
+          <mdui-card class="movie-card" variant="elevated" clickable href="{% url 'movie_detail' movie.id %}">
+            <h3>{{ movie.title }}</h3>
+
+            <div class="movie-meta">
+              <span class="badge">{{ movie.get_genre_display }}</span>
+              <span class="badge">{% if movie.is_series %}سریال{% else %}فیلم{% endif %}</span>
+              <span class="badge">{{ movie.release_year }}</span>
+            </div>
+
+            <p>{{ movie.description|truncatechars:90 }}</p>
+
+            <div class="movie-info">
+              <div>کارگردان: {{ movie.director }}</div>
+              <div>امتیاز: {{ movie.rating|default:"—" }} از ۱۰</div>
+            </div>
+
+            <p class="more-link">مشاهده جزئیات ←</p>
+          </mdui-card>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty-state">
+        <h2>هنوز فیلمی ثبت نشده است</h2>
+        <p>فیلم‌ها از پنل ادمین اضافه می‌شوند.</p>
+      </div>
+    {% endif %}
+  </main>
+</body>
+</html>

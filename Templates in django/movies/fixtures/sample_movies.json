@@ -1,0 +1,86 @@
+[
+  {
+    "model": "movies.movie",
+    "fields": {
+      "title": "رستگاری در شاوشنک",
+      "description": "بانکداری که به اشتباه به قتل همسرش محکوم شده، سال‌ها در زندانی سخت دوام می‌آورد و با صبر و امید، دوستی‌ای عمیق می‌سازد.",
+      "genre": "drama",
+      "release_year": 1994,
+      "duration_minutes": 142,
+      "director": "فرانک دارابونت",
+      "rating": "9.3",
+      "is_series": false,
+      "created_at": "2026-11-21T10:00:00Z"
+    }
+  },
+  {
+    "model": "movies.movie",
+    "fields": {
+      "title": "شهر اشباح",
+      "description": "دختری ده‌ساله در جهانی پر از ارواح و موجودات عجیب گرفتار می‌شود و برای نجات پدر و مادرش باید در یک گرمابه جادویی کار کند.",
+      "genre": "animation",
+      "release_year": 2001,
+      "duration_minutes": 125,
+      "director": "هایائو میازاکی",
+      "rating": "8.6",
+      "is_series": false,
+      "created_at": "2026-11-21T10:01:00Z"
+    }
+  },
+  {
+    "model": "movies.movie",
+    "fields": {
+      "title": "بریکینگ بد",
+      "description": "معلم شیمی‌ای که به سرطان مبتلا شده، برای تأمین آینده خانواده‌اش وارد دنیایی خطرناک و پرتنش می‌شود که زندگی‌اش را از بیخ عوض می‌کند.",
+      "genre": "thriller",
+      "release_year": 2008,
+      "duration_minutes": 47,
+      "director": "وینس گیلیگان",
+      "rating": "9.5",
+      "is_series": true,
+      "created_at": "2026-11-21T10:02:00Z"
+    }
+  },
+  {
+    "model": "movies.movie",
+    "fields": {
+      "title": "شوالیه تاریکی",
+      "description": "با ظهور جوکر، تبهکاری آشوبگر، بتمن با سخت‌ترین آزمون اخلاقی‌اش روبه‌رو می‌شود و برای نجات گاتهام باید مرزهایش را جابه‌جا کند.",
+      "genre": "action",
+      "release_year": 2008,
+      "duration_minutes": 152,
+      "director": "کریستوفر نولان",
+      "rating": "9.0",
+      "is_series": false,
+      "created_at": "2026-11-21T10:03:00Z"
+    }
+  },
+  {
+    "model": "movies.movie",
+    "fields": {
+      "title": "انگل",
+      "description": "خانواده‌ای فقیر کم‌کم در زندگی خانواده‌ای ثروتمند نفوذ می‌کند و این نفوذ پیامدهایی غیرمنتظره دارد.",
+      "genre": "thriller",
+      "release_year": 2019,
+      "duration_minutes": 132,
+      "director": "بونگ جون‌هو",
+      "rating": "8.5",
+      "is_series": false,
+      "created_at": "2026-11-21T10:04:00Z"
+    }
+  },
+  {
+    "model": "movies.movie",
+    "fields": {
+      "title": "هتل بزرگ بوداپست",
+      "description": "دربان افسانه‌ای یک هتل اروپایی و شاگرد جوانش با سرقت یک تابلوی گران‌بها درگیر ماجراهایی طنزآمیز و عجیب می‌شوند.",
+      "genre": "comedy",
+      "release_year": 2014,
+      "duration_minutes": 99,
+      "director": "وس اندرسون",
+      "rating": "8.1",
+      "is_series": false,
+      "created_at": "2026-11-21T10:05:00Z"
+    }
+  }
+]
