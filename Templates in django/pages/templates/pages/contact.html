@@ -22,6 +22,11 @@
     .page-header h1 { margin-bottom: 8px; }
     .page-header p { margin: 0; opacity: 0.8; }
 
+    /* پیام موفقیت یا خطا */
+    .alert { display: block; padding: 16px; margin-bottom: 24px; }
+    .alert-success { background-color: rgb(var(--mdui-color-primary-container)); }
+    .alert-error { background-color: rgb(var(--mdui-color-error-container)); }
+
     /* چیدمان دو ستونی: اطلاعات و فرم */
     .contact-grid {
       display: grid;
@@ -80,6 +85,14 @@
       <h1>تماس با ما</h1>
       <p>سؤال، پیشنهاد یا انتقادی دارید؟ خوشحال می‌شویم بشنویم.</p>
     </div>
+
+    {% if messages %}
+      {% for message in messages %}
+        <mdui-card class="alert alert-{{ message.tags }}" variant="filled">
+          {{ message }}
+        </mdui-card>
+      {% endfor %}
+    {% endif %}
 
     <div class="contact-grid">
 

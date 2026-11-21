@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import render, redirect
+
+from .forms import ContactForm
 
 
 def about(request):
@@ -6,12 +9,12 @@ def about(request):
 
 
 def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'پیام شما با موفقیت ارسال شد. به‌زودی پاسخ می‌دهیم.')
+        else:
+            messages.error(request, 'اطلاعات واردشده معتبر نیست. لطفاً دوباره بررسی کنید.')
+        return redirect('/contact/')
     return render(request, 'pages/contact.html')
-
-
-def login_view(request):
-    return render(request, 'pages/login.html')
-
-
-def register(request):
-    return render(request, 'pages/register.html')

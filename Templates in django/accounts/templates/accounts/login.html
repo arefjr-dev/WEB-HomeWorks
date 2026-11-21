@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ثبت‌نام</title>
+  <title>ورود</title>
 
   <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
   <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
@@ -17,7 +17,7 @@
     .nav-desktop { display: flex; gap: 4px; }
     .nav-mobile { display: none; }
 
-    /* فرم ثبت‌نام */
+    /* فرم ورود */
     .form-wrapper { display: flex; justify-content: center; }
     .form-card {
       width: 100%;
@@ -27,9 +27,13 @@
     }
     .form-card h1 { margin-top: 0; }
     .form-card mdui-text-field { width: 100%; margin-bottom: 16px; }
-    .form-card mdui-checkbox { margin-bottom: 16px; }
     .form-card mdui-button[type="submit"] { width: 100%; }
     .form-footer { margin-top: 16px; text-align: center; }
+
+    /* پیام موفقیت یا خطا */
+    .alert { display: block; padding: 12px 16px; margin-bottom: 12px; }
+    .alert-success { background-color: rgb(var(--mdui-color-primary-container)); }
+    .alert-error { background-color: rgb(var(--mdui-color-error-container)); }
 
     /* صفحه‌های باریک (موبایل) */
     @media (max-width: 640px) {
@@ -50,8 +54,8 @@
     <div class="nav-desktop">
       <mdui-button variant="text" href="/about/">درباره ما</mdui-button>
       <mdui-button variant="text" href="/contact/">تماس با ما</mdui-button>
-      <mdui-button variant="text" href="/login/">ورود</mdui-button>
-      <mdui-button variant="tonal" href="/register/">ثبت‌نام</mdui-button>
+      <mdui-button variant="tonal" href="/login/">ورود</mdui-button>
+      <mdui-button variant="text" href="/register/">ثبت‌نام</mdui-button>
     </div>
 
     <mdui-dropdown class="nav-mobile">
@@ -68,30 +72,21 @@
   <main class="container">
     <div class="form-wrapper">
       <mdui-card class="form-card" variant="elevated">
-        <h1>ثبت‌نام در سکانس</h1>
+        <h1>ورود به سکانس</h1>
 
-        <form method="post" action="/register/">
+        {% for message in messages %}
+          <mdui-card class="alert alert-{{ message.tags }}" variant="filled">
+            {{ message }}
+          </mdui-card>
+        {% endfor %}
+
+        <form method="post" action="/login/">
           {% csrf_token %}
 
           <mdui-text-field
             variant="outlined"
-            label="نام و نام خانوادگی"
-            name="full_name"
-            required>
-          </mdui-text-field>
-
-          <mdui-text-field
-            variant="outlined"
-            label="نام کاربری"
+            label="نام کاربری یا ایمیل"
             name="username"
-            required>
-          </mdui-text-field>
-
-          <mdui-text-field
-            variant="outlined"
-            type="email"
-            label="ایمیل"
-            name="email"
             required>
           </mdui-text-field>
 
@@ -104,28 +99,32 @@
             required>
           </mdui-text-field>
 
-          <mdui-text-field
-            variant="outlined"
-            type="password"
-            label="تکرار رمز عبور"
-            name="password_confirm"
-            toggle-password
-            required>
-          </mdui-text-field>
-
-          <mdui-checkbox name="terms" required>
-            قوانین و مقررات سکانس را می‌پذیرم
-          </mdui-checkbox>
-
-          <mdui-button type="submit" variant="filled">ثبت‌نام</mdui-button>
+          <mdui-button type="submit" variant="filled">ورود</mdui-button>
         </form>
 
         <p class="form-footer">
-          قبلاً ثبت‌نام کرده‌اید؟
-          <a href="/login/">وارد شوید</a>
+          حساب کاربری ندارید؟
+          <a href="/register/">ثبت‌نام کنید</a>
         </p>
       </mdui-card>
     </div>
   </main>
+
+    <script>
+    // هر بار صفحه نمایش داده شد (از جمله با دکمه Back)، فرم را به حالت اولیه برگردان
+    function clearForm() {
+      document.querySelectorAll('mdui-text-field').forEach(function (field) {
+        field.value = field.dataset.initial || '';
+      });
+      document.querySelectorAll('mdui-checkbox').forEach(function (box) {
+        box.checked = false;
+      });
+    }
+    window.addEventListener('pageshow', function () {
+      clearForm();
+      setTimeout(clearForm, 100);
+    });
+  </script>
+  
 </body>
 </html>
