@@ -1,167 +1,226 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl" class="mdui-theme-auto">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ثبت‌نام</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ثبت‌نام</title>
 
-  <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
-  <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css" />
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
 
-  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
-  <style>
-    body { font-family: Vazirmatn, sans-serif; }
-    .container { max-width: 960px; margin: 24px auto; padding: 0 16px; }
+    <link
+      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: Vazirmatn, sans-serif;
+      }
+      .container {
+        max-width: 960px;
+        margin: 24px auto;
+        padding: 0 16px;
+      }
 
-    /* منوی بالا: دکمه‌ها در کامپیوتر، منوی کشویی در موبایل */
-    .nav-desktop { display: flex; gap: 4px; }
-    .nav-mobile { display: none; }
+      /* منوی بالا: دکمه‌ها در کامپیوتر، منوی کشویی در موبایل */
+      .nav-desktop {
+        display: flex;
+        gap: 4px;
+      }
+      .nav-mobile {
+        display: none;
+      }
 
-    /* فرم ثبت‌نام */
-    .form-wrapper { display: flex; justify-content: center; }
-    .form-card {
-      width: 100%;
-      max-width: 420px;
-      box-sizing: border-box;
-      padding: 24px;
-    }
-    .form-card h1 { margin-top: 0; }
-    .form-card mdui-text-field { width: 100%; margin-bottom: 16px; }
-    .form-card mdui-checkbox { margin-bottom: 16px; }
-    .form-card mdui-button[type="submit"] { width: 100%; }
-    .form-footer { margin-top: 16px; text-align: center; }
+      /* فرم ثبت‌نام */
+      .form-wrapper {
+        display: flex;
+        justify-content: center;
+      }
+      .form-card {
+        width: 100%;
+        max-width: 420px;
+        box-sizing: border-box;
+        padding: 24px;
+      }
+      .form-card h1 {
+        margin-top: 0;
+      }
+      .form-card mdui-text-field {
+        width: 100%;
+        margin-bottom: 16px;
+      }
+      .form-card mdui-checkbox {
+        margin-bottom: 16px;
+      }
+      .form-card mdui-button[type="submit"] {
+        width: 100%;
+      }
+      .form-footer {
+        margin-top: 16px;
+        text-align: center;
+      }
 
-    /* پیام موفقیت یا خطا */
-    .alert { display: block; padding: 12px 16px; margin-bottom: 12px; }
-    .alert-success { background-color: rgb(var(--mdui-color-primary-container)); }
-    .alert-error { background-color: rgb(var(--mdui-color-error-container)); }
+      /* پیام موفقیت یا خطا */
+      .alert {
+        display: block;
+        padding: 12px 16px;
+        margin-bottom: 12px;
+      }
+      .alert-success {
+        background-color: rgb(var(--mdui-color-primary-container));
+      }
+      .alert-error {
+        background-color: rgb(var(--mdui-color-error-container));
+      }
 
-    /* صفحه‌های باریک (موبایل) */
-    @media (max-width: 640px) {
-      .nav-desktop { display: none; }
-      .nav-mobile { display: block; }
-    }
-    @media (max-width: 480px) {
-      .container { padding: 0 12px; }
-      .form-card { padding: 16px; }
-    }
-  </style>
-</head>
-<body>
-  <mdui-top-app-bar>
-    <mdui-top-app-bar-title>سکانس</mdui-top-app-bar-title>
-    <div style="flex-grow: 1"></div>
+      /* صفحه‌های باریک (موبایل) */
+      @media (max-width: 640px) {
+        .nav-desktop {
+          display: none;
+        }
+        .nav-mobile {
+          display: block;
+        }
+      }
+      @media (max-width: 480px) {
+        .container {
+          padding: 0 12px;
+        }
+        .form-card {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <mdui-top-app-bar>
+      <mdui-top-app-bar-title>سکانس</mdui-top-app-bar-title>
+      <div style="flex-grow: 1"></div>
 
-    <div class="nav-desktop">
-      <mdui-button variant="text" href="/about/">درباره ما</mdui-button>
-      <mdui-button variant="text" href="/contact/">تماس با ما</mdui-button>
-      <mdui-button variant="text" href="/movies/">فیلم‌ها</mdui-button>
-      <mdui-button variant="text" href="/login/">ورود</mdui-button>
-      <mdui-button variant="tonal" href="/register/">ثبت‌نام</mdui-button>
-    </div>
-
-    <mdui-dropdown class="nav-mobile">
-      <mdui-button slot="trigger" variant="tonal">منو</mdui-button>
-      <mdui-menu>
-        <mdui-menu-item href="/about/">درباره ما</mdui-menu-item>
-        <mdui-menu-item href="/contact/">تماس با ما</mdui-menu-item>
+      <div class="nav-desktop">
+        <mdui-button variant="text" href="/about/">درباره ما</mdui-button>
+        <mdui-button variant="text" href="/contact/">تماس با ما</mdui-button>
         <mdui-button variant="text" href="/movies/">فیلم‌ها</mdui-button>
-        <mdui-menu-item href="/login/">ورود</mdui-menu-item>
-        <mdui-menu-item href="/register/">ثبت‌نام</mdui-menu-item>
-      </mdui-menu>
-    </mdui-dropdown>
-  </mdui-top-app-bar>
+        <mdui-button variant="text" href="/login/">ورود</mdui-button>
+        <mdui-button variant="tonal" href="/register/">ثبت‌نام</mdui-button>
+      </div>
 
-  <main class="container">
-    <div class="form-wrapper">
-      <mdui-card class="form-card" variant="elevated">
-        <h1>ثبت‌نام در سکانس</h1>
+      <mdui-dropdown class="nav-mobile">
+        <mdui-button slot="trigger" variant="tonal">منو</mdui-button>
+        <mdui-menu>
+          <mdui-menu-item href="/about/">درباره ما</mdui-menu-item>
+          <mdui-menu-item href="/contact/">تماس با ما</mdui-menu-item>
+          <mdui-button variant="text" href="/movies/">فیلم‌ها</mdui-button>
+          <mdui-menu-item href="/login/">ورود</mdui-menu-item>
+          <mdui-menu-item href="/register/">ثبت‌نام</mdui-menu-item>
+        </mdui-menu>
+      </mdui-dropdown>
+    </mdui-top-app-bar>
 
-        {% for message in messages %}
+    <main class="container">
+      <div class="form-wrapper">
+        <mdui-card class="form-card" variant="elevated">
+          <h1>ثبت‌نام در سکانس</h1>
+
+          {% for message in messages %}
           <mdui-card class="alert alert-{{ message.tags }}" variant="filled">
             {{ message }}
           </mdui-card>
-        {% endfor %}
+          {% endfor %}
 
-        <form method="post" action="/register/" autocomplete="off">
-          {% csrf_token %}
+          <form method="post" action="/register/" autocomplete="off">
+            {% csrf_token %}
 
-          <mdui-text-field
-            variant="outlined"
-            label="نام و نام خانوادگی"
-            name="full_name"
-            value="{{ values.full_name }}"
-            data-initial="{{ values.full_name }}"
-            required>
-          </mdui-text-field>
+            <mdui-text-field
+              variant="outlined"
+              label="نام و نام خانوادگی"
+              name="full_name"
+              value="{{ values.full_name }}"
+              data-initial="{{ values.full_name }}"
+              required
+            >
+            </mdui-text-field>
 
-          <mdui-text-field
-            variant="outlined"
-            label="نام کاربری"
-            name="username"
-            value="{{ values.username }}"
-            data-initial="{{ values.username }}"
-            required>
-          </mdui-text-field>
+            <mdui-text-field
+              variant="outlined"
+              label="نام کاربری"
+              name="username"
+              value="{{ values.username }}"
+              data-initial="{{ values.username }}"
+              required
+            >
+            </mdui-text-field>
 
-          <mdui-text-field
-            variant="outlined"
-            type="email"
-            label="ایمیل"
-            name="email"
-            value="{{ values.email }}"
-            data-initial="{{ values.email }}"
-            required>
-          </mdui-text-field>
+            <mdui-text-field
+              variant="outlined"
+              type="email"
+              label="ایمیل"
+              name="email"
+              value="{{ values.email }}"
+              data-initial="{{ values.email }}"
+              required
+            >
+            </mdui-text-field>
 
-          <mdui-text-field
-            variant="outlined"
-            type="password"
-            label="رمز عبور"
-            name="password"
-            toggle-password
-            required>
-          </mdui-text-field>
+            <mdui-text-field
+              variant="outlined"
+              type="password"
+              label="رمز عبور"
+              name="password"
+              toggle-password
+              required
+            >
+            </mdui-text-field>
 
-          <mdui-text-field
-            variant="outlined"
-            type="password"
-            label="تکرار رمز عبور"
-            name="password_confirm"
-            toggle-password
-            required>
-          </mdui-text-field>
+            <mdui-text-field
+              variant="outlined"
+              type="password"
+              label="تکرار رمز عبور"
+              name="password_confirm"
+              toggle-password
+              required
+            >
+            </mdui-text-field>
 
-          <mdui-checkbox name="terms" required>
-            قوانین و مقررات سکانس را می‌پذیرم
-          </mdui-checkbox>
+            <mdui-checkbox name="terms" required>
+              قوانین و مقررات سکانس را می‌پذیرم
+            </mdui-checkbox>
 
-          <mdui-button type="submit" variant="filled">ثبت‌نام</mdui-button>
-        </form>
+            <mdui-button type="submit" variant="filled">ثبت‌نام</mdui-button>
+          </form>
 
-        <p class="form-footer">
-          قبلاً ثبت‌نام کرده‌اید؟
-          <a href="/login/">وارد شوید</a>
-        </p>
-      </mdui-card>
-    </div>
-  </main>
+          <p class="form-footer">
+            قبلاً ثبت‌نام کرده‌اید؟
+            <a href="/login/">وارد شوید</a>
+          </p>
+        </mdui-card>
+      </div>
+    </main>
 
     <script>
-    // هر بار صفحه نمایش داده شد (از جمله با دکمه Back)، فرم را به حالت اولیه برگردان
-    function clearForm() {
-      document.querySelectorAll('mdui-text-field').forEach(function (field) {
-        field.value = field.dataset.initial || '';
+      var termsBox = document.getElementById("terms-checkbox");
+      var submitBtn = document.getElementById("submit-btn");
+
+      function updateSubmitState() {
+        submitBtn.disabled = !termsBox.checked;
+      }
+
+      termsBox.addEventListener("change", updateSubmitState);
+
+      function clearForm() {
+        document.querySelectorAll("mdui-text-field").forEach(function (field) {
+          field.value = field.dataset.initial || "";
+        });
+        document.querySelectorAll("mdui-checkbox").forEach(function (box) {
+          box.checked = false;
+        });
+        updateSubmitState();
+      }
+
+      window.addEventListener("pageshow", function () {
+        clearForm();
+        setTimeout(clearForm, 100);
       });
-      document.querySelectorAll('mdui-checkbox').forEach(function (box) {
-        box.checked = false;
-      });
-    }
-    window.addEventListener('pageshow', function () {
-      clearForm();
-      setTimeout(clearForm, 100);
-    });
-  </script>
-  
-</body>
+    </script>
+  </body>
 </html>
